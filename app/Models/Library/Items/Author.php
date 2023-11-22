@@ -16,4 +16,9 @@ class Author extends Model
         'firstname',
         'patronymic',
     ];
+
+    public function getFullnameAttribute()
+    {
+        return $this -> lastname . ' ' . $this -> firstname . (!empty($this -> patronymic) ? ' ' . $this -> patronymic : '');
+    }
 }
