@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Orchid\Screens\Library\Items\Lists\AuthorsScreen;
 use App\Orchid\Screens\Library\Items\Lists\BooksScreen;
+use App\Orchid\Screens\Library\Items\Lists\PublishingsScreen;
 use App\Orchid\Screens\Library\Items\Lists\TypesOfBooksScreen;
 use App\Orchid\Screens\Library\Readers\Lists\GroupsScreen;
 use App\Orchid\Screens\Library\Readers\Lists\ReadersScreen;
@@ -95,7 +96,7 @@ Route::screen('items/books', BooksScreen::class)
         -> push('Издания', route('items.books')));
 
 // Platform > Library > Publishings
-Route::screen('items/publishings', BooksScreen::class)
+Route::screen('items/publishings', PublishingsScreen::class)
     -> name('items.publishings')
     -> breadcrumbs(fn (Trail $trail) => $trail
         -> parent('platform.index')

@@ -39,7 +39,7 @@ class PlatformProvider extends OrchidServiceProvider
                 -> title('Категоризация')
                 -> route('items.authors'),
 
-            Menu::make('Издания')
+            Menu::make('Издательства')
                 -> icon('bs.building')
                 -> route('items.publishings'),
 

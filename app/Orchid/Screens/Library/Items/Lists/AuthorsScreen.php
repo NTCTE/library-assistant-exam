@@ -78,7 +78,7 @@ class AuthorsScreen extends Screen
         ];
     }
 
-    public function asyncModalAuthor()
+    public function asyncModalAuthor(): array
     {
         $author = [
             'id' => request() -> input('id'),

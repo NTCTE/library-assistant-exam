@@ -11,6 +11,8 @@ class Publishing extends Model
     use HasFactory;
     use AsSource;
 
+    protected $table = 'publishing';
+
     protected $fillable = [
         'name',
     ];
