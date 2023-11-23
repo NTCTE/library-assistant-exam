@@ -62,10 +62,12 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make('Выдача')
                 -> icon('bs.arrow-right-square-fill')
-                -> title('Учёт'),
+                -> title('Учёт')
+                -> route('accounting.issuance'),
 
             Menu::make('Возврат')
-                -> icon('bs.arrow-left-square-fill'),
+                -> icon('bs.arrow-left-square-fill')
+                -> route('accounting.return'),
 
             Menu::make(__('Users'))
                 ->icon('bs.people')

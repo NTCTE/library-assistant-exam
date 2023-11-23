@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\Library\Accounting\IssuanceScreen;
 use App\Orchid\Screens\Library\Items\Lists\AuthorsScreen;
 use App\Orchid\Screens\Library\Items\Lists\BooksScreen;
 use App\Orchid\Screens\Library\Items\Lists\PublishingsScreen;
@@ -16,6 +17,7 @@ use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
+use App\Orchid\Screens\Library\Accounting\ReturnScreen;
 
 /*
 |--------------------------------------------------------------------------
@@ -122,3 +124,17 @@ Route::screen('readers/readers', ReadersScreen::class)
     -> breadcrumbs(fn (Trail $trail) => $trail
         -> parent('platform.index')
         -> push('Читатели', route('readers.readers')));
+
+// Platform > Library > Issuanse
+Route::screen('accounting/issuance', IssuanceScreen::class)
+    -> name('accounting.issuance')
+    -> breadcrumbs(fn (Trail $trail) => $trail
+        -> parent('platform.index')
+        -> push('Выдача', route('accounting.issuance')));
+
+// Platform > Library > Return
+Route::screen('accounting/return', ReturnScreen::class)
+    -> name('accounting.return')
+    -> breadcrumbs(fn (Trail $trail) => $trail
+        -> parent('platform.index')
+        -> push('Возврат', route('accounting.return')));
