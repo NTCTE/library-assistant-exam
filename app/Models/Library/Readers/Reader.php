@@ -29,4 +29,14 @@ class Reader extends Model
         'student' => 'Студент',
         'other' => 'Другое',
     ];
+
+    public function getFullNameAttribute()
+    {
+        return $this -> lastname . ' ' . $this -> firstname . ' ' . $this -> patronymic;
+    }
+
+    public function group()
+    {
+        return $this -> belongsTo(Group::class);
+    }
 }
