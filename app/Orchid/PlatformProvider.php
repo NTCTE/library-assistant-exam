@@ -60,6 +60,13 @@ class PlatformProvider extends OrchidServiceProvider
                 -> icon('bs.people-fill')
                 -> route('readers.groups'),
 
+            Menu::make('Выдача')
+                -> icon('bs.arrow-right-square-fill')
+                -> title('Учёт'),
+
+            Menu::make('Возврат')
+                -> icon('bs.arrow-left-square-fill'),
+
             Menu::make(__('Users'))
                 ->icon('bs.people')
                 ->route('platform.systems.users')
