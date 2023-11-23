@@ -70,7 +70,9 @@ class AuthorsScreen extends Screen
     public function layout(): iterable
     {
         return [
-            Layout::modal('authorMeta', AuthorDataRows::class)
+            Layout::modal('authorMeta', [
+                AuthorDataRows::class,
+            ])
                 -> staticBackdrop()
                 -> withoutCloseButton()
                 -> async('asyncModalAuthor'),

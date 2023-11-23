@@ -2,10 +2,24 @@
 
 namespace App\Orchid\Screens\Library\Items\Lists;
 
+use App\Models\Library\Items\Book;
+use App\Orchid\Layouts\Library\Items\BooksDataRows;
+use App\Orchid\Layouts\Library\Items\BooksTable;
+use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
 
 class BooksScreen extends Screen
 {
+        
+    /**
+     * Books Eloquent entities.
+     *
+     * @var mixed
+     */
+    public $books;
+
     /**
      * Fetch data to be displayed on the screen.
      *
@@ -13,7 +27,9 @@ class BooksScreen extends Screen
      */
     public function query(): iterable
     {
-        return [];
+        return [
+            'books' => Book::paginate(),
+        ];
     }
 
     /**
@@ -23,7 +39,12 @@ class BooksScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'BooksScreen';
+        return 'Экземпляры';
+    }
+
+    public function description(): ?string
+    {
+        return 'На данном экране отображаются все экземпляры книг, которые есть в библиотеке.';
     }
 
     /**
@@ -33,7 +54,13 @@ class BooksScreen extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            ModalToggle::make('Добавить экземпляр')
+                -> icon('bs.person-add')
+                -> modal('bookMeta')
+                -> modalTitle('Добавление экземпляра')
+                -> method('createUpdateBook'),
+        ];
     }
 
     /**
@@ -43,6 +70,50 @@ class BooksScreen extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            Layout::modal('bookMeta', [
+                BooksDataRows::class,
+            ])
+                -> staticBackdrop()
+                -> withoutCloseButton()
+                -> async('asyncModalBook'),
+            BooksTable::class,
+        ];
+    }
+
+    public function asyncModalBook(): array
+    {
+        if (!empty(request() -> input('id')))
+        {
+            return [
+                'book' => Book::findOrFail(request() -> input('id'))
+                    -> toArray(),
+            ];
+        } else return [];
+    }
+
+    public function createUpdateBook()
+    {
+        $book = request() -> input('book');
+        if (!empty($book['id']))
+        {
+            Book::findOrFail($book['id'])
+                -> update($book);
+
+            Toast::info('Экземпляр успешно обновлен.');
+        } else
+        {
+            Book::create($book);
+
+            Toast::success('Экземпляр успешно добавлен.');
+        }
+    }
+
+    public function remove()
+    {
+        Book::findOrFail(request() -> input('id'))
+            -> delete();
+
+        Toast::info('Экземпляр успешно удален.');
     }
 }
