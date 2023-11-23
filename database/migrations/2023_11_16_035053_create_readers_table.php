@@ -23,6 +23,7 @@ return new class extends Migration
                 'other',
             ]);
             $table -> foreignId('group_id')
+                -> nullable()
                 -> references('id')
                 -> on('groups');
             $table -> boolean('can_get_books')
