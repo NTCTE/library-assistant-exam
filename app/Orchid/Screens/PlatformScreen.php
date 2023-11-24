@@ -24,7 +24,7 @@ class PlatformScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Get Started';
+        return config('app.name') . ' - Дашборд';
     }
 
     /**
@@ -32,7 +32,7 @@ class PlatformScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'Welcome to your Orchid application.';
+        return 'На данном экране вы можете увидеть статистику по взятым книгам, а также информацию о конверсии.';
     }
 
     /**
@@ -53,8 +53,7 @@ class PlatformScreen extends Screen
     public function layout(): iterable
     {
         return [
-            Layout::view('platform::partials.update-assets'),
-            Layout::view('platform::partials.welcome'),
+            
         ];
     }
 }
